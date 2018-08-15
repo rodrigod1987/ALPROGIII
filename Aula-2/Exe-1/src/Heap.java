@@ -14,6 +14,9 @@ public class Heap<T> implements IHeap<T> {
 
     @Override
     public void Remove(T element) {
+        if (this.IsEmpty())
+            System.out.print("A pilha está vazia!");
+
         _list.RemoveLast();
     }
 
