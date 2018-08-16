@@ -9,40 +9,44 @@ public class List<T> implements IList<T> {
         if (this.count == 0) {
             this.AddFirst(valor);
         } else {
-            Element<T> newElement = new Element(valor);
-            this._last.setNext(newElement);
+            Element<T> newElement = new Element<>(valor);
+            this._first.setNext(newElement);
+            newElement.setPrior(this._last);
             this._last = newElement;
             this.count++;
         }
     }
 
     @Override
-    public void AddFirst(T valor) {
-        Element<T> newElement = new Element(valor);
-        this._first = newElement;
-
-        if (this.count == 0)
-            this._last = this._first;
+    public void AddFirst(T element) {
+        if (this.count == 0) {
+            Element<T> newElement = new Element<>(element);
+            this._first = newElement;
+            this._last = newElement;
+        } else {
+            Element<T> newElement = new Element<>(element, this._first);
+            this._first.setPrior(newElement);
+            this._first = newElement;
+        }
 
         this.count++;
     }
 
     @Override
     public void RemoveLast() {
-        Element<T> current = this._first;
-        if (current.getNext() == null) {
-            this.RemoveFirst();
+        if (!ValidatePosition(this.count - 1)) {
+            System.out.print("Posição inexistente!");
             return;
         }
 
-
-        for (int i = 0; i < this.count; i++) {
-            current = current.getNext();
-            if (current.getNext() == this._last) {
-                current.setNext(null);
-                this._last = current;
-                this.count--;
-            }
+        if (this.count == 1) {
+            this.RemoveFirst();
+        }
+        else {
+            Element<T> prior = this._last.getPrior();
+            prior.setNext(null);
+            this._last = prior;
+            this.count--;
         }
     }
 
@@ -77,7 +81,7 @@ public class List<T> implements IList<T> {
         for (int i = 0; i < index; i++)
             current = this._first.getNext();
 
-        return current.getElement();
+        return current.getCurrent();
     }
 
     private boolean ValidatePosition(int position) {
