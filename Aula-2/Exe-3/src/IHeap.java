@@ -1,5 +1,6 @@
 public interface IHeap<T> {
     void Insert(T element);
-    void Remove(T element);
+    T Remove();
     boolean IsEmpty();
+    void Invert();
 }
