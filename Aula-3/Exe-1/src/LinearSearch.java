@@ -1,7 +1,7 @@
 public class LinearSearch {
 
     public boolean linearSearch(String[] data, String key){
-        for (int i = 0; i < data.length; i++){
+        for (int i = 0; i < data.length - 1; i++){
             if (data[i].equals(key))
                 return true;
         }
