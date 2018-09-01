@@ -1,7 +1,7 @@
 public class LinkedList<T> implements ILinkedList<T> {
 
     private Node<T> _first = null;
-    private Node<T> _last = null;
+    private Node<T> _current = null;
     private int count = 0;
 
     @Override
@@ -9,20 +9,20 @@ public class LinkedList<T> implements ILinkedList<T> {
         if (this.count == 0) {
             this.AddFirst(valor);
         } else {
-            Node<T> newElement = new Node(valor);
-            this._last.setNext(newElement);
-            this._last = newElement;
+            Node<T> newElement = new Node<T>(valor);
+            this._current.setNext(newElement);
+            this._current = newElement;
             this.count++;
         }
     }
 
     @Override
     public void AddFirst(T valor) {
-        Node<T> newElement = new Node(valor);
+        Node<T> newElement = new Node<T>(valor);
         this._first = newElement;
 
         if (this.count == 0)
-            this._last = this._first;
+            this._current = this._first;
 
         this.count++;
     }
@@ -38,9 +38,9 @@ public class LinkedList<T> implements ILinkedList<T> {
 
         for (int i = 0; i < this.count; i++) {
             current = current.getNext();
-            if (current.getNext() == this._last) {
+            if (current.getNext() == this._current) {
                 current.setNext(null);
-                this._last = current;
+                this._current = current;
                 this.count--;
             }
         }
@@ -57,7 +57,7 @@ public class LinkedList<T> implements ILinkedList<T> {
         this.count--;
 
         if (this.count == 0)
-            this._last = null;
+            this._current = null;
     }
 
     @Override
@@ -82,5 +82,19 @@ public class LinkedList<T> implements ILinkedList<T> {
 
     private boolean ValidatePosition(int position) {
         return position >= 0 && position <= this.count;
+    }
+
+    public Node<T> search(Object key) {
+        return search(key, _first);
+    }
+
+    private Node<T> search(Object key, Node<T> nodo) {
+
+        if (nodo.getNext() != null) {
+            if (nodo.equals(key)) return nodo;
+            else search(key, nodo.getNext());
+        }
+
+        return null;
     }
 }

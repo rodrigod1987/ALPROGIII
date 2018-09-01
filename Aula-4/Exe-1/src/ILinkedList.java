@@ -5,4 +5,5 @@ public interface ILinkedList<T> {
     void RemoveFirst(); // remove o primeiro elemento da lista.
     int Size(); // retorna o número de elementos na lista.
     T Get(int index); //retorna o elemento com o indice indicado.
+    Node<T> search(Object key);
 }
