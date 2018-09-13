@@ -1,15 +1,13 @@
 import java.util.Comparator;
 
-public class BubbleSort implements Comparator {
+public class BubbleSort<T> {
 
-    public void sort(int[] objects){
+    public void sort(T[] objects, Comparator<T> comparator){
         for (int i = 0; i < objects.length; i++) {
             boolean sorted = true;
             for(int j = 0; j < objects.length - 1; j++) {
-                if (compare(objects[j], objects[j + 1]) > 0) {
-                    int maior = objects[j];
-                    objects[j] = objects[j + 1];
-                    objects[j + 1] = maior;
+                if (comparator.compare(objects[j], objects[j + 1]) > 0) {
+                    swap(objects, j);
                     sorted = false;
                 }
             }
@@ -19,9 +17,26 @@ public class BubbleSort implements Comparator {
         }
     }
 
-    @Override
-    public int compare(Object o1, Object o2) {
-        if ((int)o1 > (int)o2) return 1;
-        else return 0;
+    public void sort(T[] objects)
+    {
+        for (int i = 0; i < objects.length; i++) {
+            boolean sorted = true;
+            for(int j = 0; j < objects.length - 1; j++) {
+                Comparable<T> comparable = (Comparable<T>) objects[i];
+                if (comparable.compareTo(objects[j + 1]) > 0) {
+                    swap(objects, j);
+                    sorted = false;
+                }
+            }
+
+            if (sorted)
+                break;
+        }
+    }
+
+    private void swap(T[] objects, int j) {
+        T maior = objects[j];
+        objects[j] = objects[j + 1];
+        objects[j + 1] = maior;
     }
 }
