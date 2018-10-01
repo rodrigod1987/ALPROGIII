@@ -3,9 +3,9 @@ public class QuickSort<T> {
     public Comparable<T>[] sort(Comparable<T>[] list, int low, int high)
     {
         if (low < high) {
-            int partitioned = partition(list, low, high);
-            sort(list, low, partitioned);
-            sort(list, partitioned+1, high);
+            int index = partition(list, low, high);
+            sort(list, low, index);
+            sort(list, index+1, high);
         }
         return list;
     }
