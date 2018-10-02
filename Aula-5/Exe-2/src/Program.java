@@ -1,8 +1,11 @@
+import java.util.Arrays;
+
 public class Program {
 
     public static void main(String[] args)
     {
         runInteger();
+        System.out.println();
         runString();
     }
 
@@ -10,10 +13,7 @@ public class Program {
         Comparable<String>[] list = new String[]{"Rodrigo Duarte", "Maria Joana", "Lucas Antonio", "Alexandre Silveira"};
 
         String[] elements = (String[])list;
-
-        for (String item : elements) {
-            System.out.println("Item: "+item);
-        }
+        System.out.println(String.join(",", elements));
 
         System.out.println();
 
@@ -21,20 +21,14 @@ public class Program {
         list = q.sort(list, 0, list.length - 1);
 
         elements = (String[])list;
-
-        for (String item : elements) {
-            System.out.println("Item: "+item);
-        }
+        System.out.println(String.join(",", elements));
     }
 
     private static void runInteger() {
         Comparable<Integer>[] list = new Integer[]{8,5,12,55,3,7,82,44,35,25,41,29,17};
 
         Integer[] elements = (Integer[])list;
-
-        for (Integer item : elements) {
-            System.out.println("Item: "+item);
-        }
+        System.out.println(String.join(",", Arrays.toString(elements)));
 
         System.out.println();
 
@@ -42,10 +36,7 @@ public class Program {
         list = q.sort(list, 0, list.length - 1);
 
         elements = (Integer[])list;
-
-        for (Integer item : elements) {
-            System.out.println("Item: "+item);
-        }
+        System.out.println(String.join(",", Arrays.toString(elements)));
     }
 
 }

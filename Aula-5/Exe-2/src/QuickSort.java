@@ -14,7 +14,6 @@ public class QuickSort<T> {
         T pivot = (T)list[end];
         int first = start-1;
 
-
         for (int i = start; i < list.length - 1; i++) {
             if (list[i].compareTo(pivot) < 0) {
                 first += 1;
