@@ -4,28 +4,34 @@ public class QuickSort<T> {
     {
         if (low < high) {
             int index = partition(list, low, high);
-            sort(list, low, index);
-            sort(list, index+1, high);
+            sort(list, low, index -1);
+            sort(list, index + 1, high);
         }
         return list;
     }
 
     private int partition(Comparable<T>[] list, int start, int end) {
-        int first = start;
-        int last = start;
-        T pivo = (T)list[end-1];
+        T pivot = (T)list[end];
+        int first = start-1;
 
-        for (int i = 0; i < list.length - 1; i++) {
-            if (list[i].compareTo(pivo) > 0)
-                last -= 1;
-            else {
-                last -= 1;
+
+        for (int i = start; i < list.length - 1; i++) {
+            if (list[i].compareTo(pivot) < 0) {
                 first += 1;
-                T aux = (T) list[first - 1];
-                list[first - 1] = list[i];
-                list[i] = (Comparable<T>) aux;
+                swap(list, first, i);
             }
         }
-        return first - 1;
+
+        T element = (T)list[first+1];
+        if (list[end].compareTo(element) < 0)
+            swap(list, first+1, end);
+
+        return first + 1;
+    }
+
+    private void swap(Comparable<T>[] list, int first, int i) {
+        T aux = (T) list[first];
+        list[first] = list[i];
+        list[i] = (Comparable<T>) aux;
     }
 }
